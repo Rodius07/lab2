@@ -49,22 +49,19 @@ def parse_xml(xml_file):
     xml_data = xml_file.read()
     dom = minidom.parseString(xml_data)
     dom.normalize()
-    
+    names = ['CharCode','Value']
     # Получаем коды валют
-    charcodes = dom.getElementsByTagName('CharCode')
-    char_code = []
-    for charcode in charcodes:
-        value = charcode.firstChild.data
-        char_code.append(value)
+    list_names = []
+    for name in names:
+
+        charcodes = dom.getElementsByTagName(name)
+        char_code = []
+        for charcode in charcodes:
+            value = charcode.firstChild.data
+            char_code.append(value)
+        list_names.append(char_code)
     
-    # Получаем значения валют
-    values = dom.getElementsByTagName('Value')
-    value_code = []
-    for value_element in values:
-        value = value_element.firstChild.data
-        value_code.append(value)
-    
-    return char_code, value_code
+    return list_names
 
 
 if __name__ == "__main__":
